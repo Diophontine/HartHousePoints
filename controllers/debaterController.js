@@ -14,7 +14,8 @@ var Debater = require('../models/debater');
         
         var debater = new Debater();      // create a new instance of the Bear model
        		debater.name = req.body.name;
-     		debater.points = req.body.points;  // set the bears name (comes from the request)
+     		debater.points = req.body.points;
+            debater.active = true;  // set the bears name (comes from the request)
 
         // save the bear and check for errors
         debater.save(function(err) {
@@ -47,6 +48,7 @@ var Debater = require('../models/debater');
 
             debater.name = req.body.name;
      		debater.points = req.body.points;
+            debater.active = req.body.active;
     
 
             // save the bear
@@ -69,4 +71,16 @@ var Debater = require('../models/debater');
 
             res.json({ message: 'Successfully deleted' });
         });
+    };
+
+        exports.calculatePointsForDebaterByID = function(req, res) {
+         Debater.findById(req.params.debater_id, function(err, debater) {
+            if (err)
+                res.send(err);
+
+            for (debater in Debater.results) {
+                text += person[x];
+            }
+            res.json(debater);
+        })
     };
